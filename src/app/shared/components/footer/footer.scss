@@ -1,0 +1,128 @@
+.container {
+    position: relative;
+    height: calc(100vh - 80px);
+    
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1.5fr;
+    padding-top: 80px;
+}
+
+.grid-element {
+    // Border on right for first column (odd items)
+    &:nth-child(odd) {
+        border-right: .1px solid var(--border-color-opaque);
+    }
+    
+    // Border on bottom for first row (first 2 items)
+    &:nth-child(-n+2) {
+        border-block: .1px solid var(--border-color-opaque);
+    }
+
+    &.grid-title {
+        display: flex;
+        align-items: end;
+    }
+
+    &.grid-contact {
+        cursor: pointer;
+        transition: all .5s cubic-bezier(1, 0, .39, .86);
+
+        &:hover,
+        &.modal-open {
+            padding: 20px;
+
+            .contact-container {
+                padding: 20px;
+            }
+
+            .arrow-img-1 {
+                transform: translate(200%, -200%);
+            }
+            
+            .arrow-img-2 {
+                transform: translate(0%, 0%) !important;
+            }
+        }
+
+        .contact-container {
+            height: 100%;
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 1px, transparent 0, transparent 50%);
+            background-size: 20px 20px;
+            transition: all .5s cubic-bezier(1, 0, .39, .86);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .arrow-img-container {
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .arrow-img-1 {
+                width: 2vw;
+                transition: all .5s cubic-bezier(1, 0, .39, .86);
+            }
+
+            .arrow-img-2 {
+                position: absolute;
+                left: 0;
+                width: 2vw;
+                transition: all .5s cubic-bezier(1, 0, .39, .86);
+                transform: translate(-150%, 150%);
+            }
+        }
+    }
+
+    &.grid-links {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &.grid-next-page {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.links-container {
+    display: flex;
+    gap: 20px;
+    text-transform: uppercase;
+
+    &-list {
+        display: flex; 
+        gap: 10px; 
+        flex-direction: column;
+    }
+}
+
+.progress-circle {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credits {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: 'Gothic';
+    font-size: 4vw;
+}

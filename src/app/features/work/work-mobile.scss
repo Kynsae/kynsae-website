@@ -1,0 +1,13 @@
+@media (max-width: 850px) {
+    .hero {
+        height: 40vh !important;
+    }
+
+    .hero-title {
+        font-size: calc(20.4vw - 10px) !important;
+    }
+
+    .hero-galaxy {
+        display: none !important;
+    }
+}

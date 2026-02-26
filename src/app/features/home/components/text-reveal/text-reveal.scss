@@ -1,0 +1,33 @@
+.text-container {
+    display: flex;
+    gap: 1.5vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+// When used as skills-text-2: spacers between words grow to fill space (space-between effect)
+:host(.skills-text-2) .text-container {
+    width: 100%;
+    gap: 0;
+}
+
+:host(.skills-text-2) .spacer {
+    flex-basis: 1.5vw;
+    flex-grow: var(--spread, 0);
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.revealed {
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.hidden {
+    color: rgba(255, 255, 255, 0);
+    transition: color 0.2s ease;
+}
+
+.letter {
+    display: inline-block;
+}

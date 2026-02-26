@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <div #rendererContainer class="three-d-grid"></div>
+
+    <div #inlineGrid class="inline-grid global-padding">
+        @for(project of projects; track $index) {
+            <div 
+                (click)="navigate(project.id)"
+                (mouseenter)="onMouseEnter($index)" 
+                (mousemove)="onMouseMove($event, $index)"
+                (mouseleave)="onMouseLeave()"
+                class="el"
+            >
+                <div class="tags">
+                    @for(tag of project.tags; track $index) {
+                        <div class="tag">{{ tag }}</div>
+                    }
+                </div>
+
+                <div class="project-title-container">
+                    <img class="active-arrow-icon" src="icons/arrow-top-right.svg" alt="Open project">
+                    <p class="project-title">
+                        {{ project.title }}
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

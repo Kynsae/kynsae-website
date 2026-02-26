@@ -1,0 +1,71 @@
+<footer class="container">
+    <!-- SOCIALS LINKS -->
+    <div class="grid-element grid-title global-padding">
+
+        <p class="title">KYNSAE STUDIO</p>
+    </div>
+
+    <!-- CONTACT -->
+    <div (click)="openContactModal()" class="grid-element grid-contact" [class.modal-open]="contactModalService.isOpen()">
+        <div class="contact-container">
+            <p class="text-gray-opaque">
+                SEND US DIRECTLY A MESSAGE
+            </p>
+    
+            <div class="title-container">
+                <h2>CONTACT</h2>
+    
+                <div class="arrow-img-container">
+                    <img class="arrow-img-1" src="icons/arrow-top-right.svg" alt="External link">
+                    <img class="arrow-img-2" src="icons/arrow-top-right.svg" alt="" aria-hidden="true">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT LINKS -->
+    <div class="grid-element grid-links global-padding">
+        <div class="links-container">
+            <p class="text-gray-transparent">SOCIALS</p>
+
+            <div class="links-container-list">
+                @for(link of SOCIAL_LINKS; track $index) {
+                    <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                        <app-text-hover-slide [text]="link.label"/>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="links-container">
+            <p class="text-gray-transparent">CONTACT</p>
+
+            <div class="links-container-list">
+                @for(link of CONTACT_LINKS; track $index) {
+                    <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                        <app-text-hover-slide [text]="link.label"/>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- NEXT PAGE -->
+    <div class="grid-element global-padding grid-next-page">
+        <p class="text-gray-transparent">KEEP SCROLLING TO LEARN MORE</p>
+        <h2>{{ nextPageTitle() }}</h2>
+
+        <app-progress-circle 
+            class="progress-circle" 
+            [percentage]="scrollSpringPercentage()"
+        ></app-progress-circle>
+    </div>
+
+    <!-- CREDITS -->
+    <div class="credits global-padding">
+        <p class="text-gray-transparent">©2026 ALL RIGHTS RESERVED</p>
+
+        <p class="text-gray-transparent">MADE WITH LOVE</p>
+    </div>
+    
+</footer>

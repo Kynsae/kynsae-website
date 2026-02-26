@@ -1,0 +1,53 @@
+:host {
+    display: block;
+    
+    &:hover, &.force-active {
+        .real {
+            transform: translateY(-100%);
+        }
+
+        .fake {
+            transform: translateY(0%) translateX(-100%);
+        }
+
+        .line {
+            width: 100%;
+        }
+    }
+}
+
+$transition: 0.45s cubic-bezier(1, 0, .39, .86);
+
+.container {
+    position: relative;
+    overflow: hidden;
+    transition: transform $transition;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.ghost {
+    opacity: 0;
+}
+
+.real {
+    position: absolute;
+    transition: transform $transition;
+    will-change: transform;
+}
+
+.fake {
+    position: absolute;
+    transform: translateY(100%) translateX(-100%);
+    transition: transform $transition;
+    will-change: transform;
+}
+
+.line {
+    width: 0%;
+    height: 1px;
+    background-color: white;
+    transition: width $transition;
+    transition-delay: 0.05s;
+    will-change: width;
+}

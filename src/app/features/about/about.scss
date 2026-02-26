@@ -1,0 +1,267 @@
+app-pc-generated {
+    will-change: transform;
+}
+
+.fake-planet {
+    position: fixed;
+    width: 200vw;
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0%);
+    border-radius: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 67%, rgba(255, 255, 255, 1) 70.7%);
+    mix-blend-mode: color-dodge;
+    will-change: top, background;
+}
+
+.scroll-container {
+    position: relative;
+    height: 1150vh;
+}
+
+@keyframes crosss-intro-anim {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.intro-animate {
+    .cross-container {
+        animation: crosss-intro-anim 1s ease-in-out 1.5s forwards;
+    }
+}
+
+.cross-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    will-change: transform;
+    contain: layout style paint;
+
+    .blocker {
+        width: 100%;
+        will-change: width;
+    }
+
+    .blocker-v {
+        height: 100%;
+        will-change: height;
+    }
+
+    .cross-side {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 80px);
+
+        &.cross-side-right {
+            right: 40px;
+        }
+    }
+
+    .cross-side-2 {
+        display: flex;
+        align-items: center;
+        height: calc(100% - 80px);
+    }
+
+    .cross {
+        will-change: transform;
+    }
+}
+
+.hero {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    app-text-blur {
+        will-change: transform;
+    }
+
+    .hero-title-wrapper {
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    .hero-subtitle-wrapper {
+        overflow: hidden;
+        padding: 20px;
+        transform: translateY(-40%);
+        font-size: 1.2vw;
+    }
+}
+
+.main-title {
+    font-size: 4.5vw;
+    font-family: 'Gothic', 'arial';
+    will-change: transform;
+}
+
+.who {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 120px;
+    font-size: 2.9vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    will-change: opacity;
+
+    .top-left {
+        p {
+            will-change: transform;
+        }
+    }
+
+    .bottom-right {
+        text-align: right;
+
+        p {
+            will-change: transform;
+        }
+    }
+}
+
+.mission {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.9vw;
+    text-align: center;
+
+    .subtitle {
+        will-change: transform, opacity;
+    }
+
+    p {
+        will-change: transform, opacity;
+    }
+
+    .mission-letter {
+        display: inline-block;
+        transition: opacity 0.15s ease-out;
+        white-space: pre;
+        will-change: opacity;
+    }
+}
+
+.subtitle {
+    font-family: 'Gothic', 'arial';
+    font-size: 1.4vw;
+    margin-bottom: 30px;
+}
+
+.location {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    
+    .morph-text {
+        width: 100vw;
+        padding-bottom: 60px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    p {
+        font-size: 2.9vw;
+        will-change: transform, opacity;
+    }
+
+    .spacer {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        will-change: flex-grow;
+
+        &.spacer-fixed {
+            flex-grow: 1;
+        }
+
+        .center-text {
+            position: absolute;
+            width: 57vw;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2vw;
+            text-transform: uppercase;
+            will-change: transform, opacity;
+        }
+    }
+}
+
+.skills {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    will-change: transform, opacity;
+}
+
+.title-container {
+    height: 50%;
+    display: flex;
+    align-items: center;
+
+    .main-title {
+        p {
+            will-change: transform;
+        }
+    }
+}
+
+.list {
+    display: flex;
+    align-items: end;
+    height: 50%;
+    font-size: 1.4vw;
+    text-transform: uppercase;
+    justify-content: space-between;
+
+    .content {
+        display: flex;
+        gap: 20px;
+
+        .subtitle {
+            will-change: transform, opacity;
+        }
+
+        p {
+            will-change: transform, opacity;
+        }
+    }
+}

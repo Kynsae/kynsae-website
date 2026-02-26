@@ -1,0 +1,13 @@
+:host {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  box-sizing: border-box;
+}
+
+.renderer-container {
+  width: 100%;
+  height: 100%;
+}

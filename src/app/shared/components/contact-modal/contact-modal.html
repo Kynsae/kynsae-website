@@ -1,0 +1,56 @@
+<div style="position: absolute;" [class.open]="isOpen()" [class.was-open]="wasOpen">
+    <div (click)="closeModal()" (mouseenter)="onBackgroundHover(true)" (mouseleave)="onBackgroundHover(false)" class="background"></div>
+    
+    <div (click)="closeModal()" (mouseenter)="onCloseButtonHover(true)" (mouseleave)="onCloseButtonHover(false)" class="close-button">
+        <img src="icons/close.svg" alt="close the modal">
+    </div>
+
+    <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="submitForm(); $event.preventDefault()">
+        <div class="modal-container">
+            <div class="sub-modal-container">
+                <h2>GET IN TOUCH</h2>
+                <div class="text-input-container">
+                    <p>></p>
+                    <input maxlength="254" tabindex="1" class="text-input" placeholder="ENTER YOUR EMAIL" type="email" formControlName="email">
+                </div>
+                @if(emailError) {
+                    <p class="error-label">UNLESS YOU'RE BATMAN, WE NEED A WAY TO REACH YOU.</p>
+                }
+                <div class="text-input-container">
+                    <p>></p>
+                    <app-custom-textarea [maxlength]=1000 placeholder="AND SAY HI" class="textarea-component" formControlName="message"></app-custom-textarea>
+                </div>
+                @if(messageError) {
+                    <p class="error-label">THE MESSAGE FIELD IS HUNGRY. FEED IT WORDS!</p>
+                }
+            </div>
+            
+            <button #submitButton type="submit" tabindex="3" class="sub-modal-container send-button" (click)="submitForm()">
+                <p [class.send-button-label-hide]="isLoading" class="send-button-label">SEND MESSAGE</p>
+                <app-loading-circular [class.loading-circle-show]="isLoading" class="loading-circle"></app-loading-circular>
+            </button>
+        </div>
+    </form>
+
+    @if (wasOpen) {
+        <app-status-pill
+            [type]="'success'"
+            [(isPresenting)]="success"
+            class="status-pill"
+        >
+            MESSAGE SENT! YOU'LL GET A RESPONSE WITHIN 24 HOURS
+        </app-status-pill>
+
+        <app-status-pill
+            [type]="'error'"
+            [(isPresenting)]="serverError"
+            class="status-pill"
+        >
+            A SERVER ERROR OCCURED PLEASE TRY AGAIN LATER
+        </app-status-pill>
+    }
+
+    <div #mouseLabel [class.show]="showMouseLabel && isOpen()" class="mouse-label">
+        CLOSE
+    </div>
+</div>

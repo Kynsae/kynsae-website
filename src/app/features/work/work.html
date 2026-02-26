@@ -1,0 +1,28 @@
+<main [class.animate]="navigationLoader.hasPageLoaded()">
+    <header class="hero">
+        <img 
+            (load)="updateSourceProgress(0, 100)" 
+            class="hero-galaxy" 
+            src="images/galaxy-2.webp"
+            alt="galaxy-background"
+        >
+    
+        <div [style.transform]="uiManager.mainTitleTransform" class="hero-title">
+            @for(char of 'PROJECTS'; track $index) {
+                <p [style.transition-delay]="uiManager.getTransitionDelay($index)" class="hero-title-letter">
+                    {{ char }}
+                </p>
+            }
+        </div>
+    </header>
+    
+    <section aria-label="Projects Portfolio">
+        @if (!viewportService.isMobile()) {
+            <app-projects-grid (loadProgress)="updateSourceProgress(1, $event)"></app-projects-grid>
+        } @else {
+            <app-projects-grid-mobile (loadProgress)="updateSourceProgress(1, $event)"></app-projects-grid-mobile>
+        }
+    </section>
+    
+    <app-footer [nextPageRoute]="'/about'" [nextPageTitle]="'ABOUT THE STUDIO'"></app-footer>
+</main>

@@ -1,0 +1,13 @@
+<div class="textarea-wrapper">
+    <textarea 
+        [attr.maxlength]="maxlength()"
+        tabindex="2"
+        class="textare-multiline" 
+        [placeholder]="placeholder()"
+        #textareaRef 
+        (wheel)="onTextareaScroll($event)" 
+        (scroll)="onTextareaScrollEvent()"></textarea>
+    <div class="custom-scrollbar" #customScrollbar>
+        <div class="custom-scrollbar-thumb" #scrollbarThumb></div>
+    </div>
+</div>

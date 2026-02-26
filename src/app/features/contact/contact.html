@@ -1,0 +1,31 @@
+<div [class.intro-animate]="navigationLoader.hasPageLoaded()" class="hero">
+    <app-torus (loadingProgress)="load($event)"></app-torus>
+
+    <div class="hero-title-container">
+        <div class="subtitle s-left">
+            @for(line of ['YOU LIKE DISLIKE OUR PROJECTS?', 'LET US KNOW!']; track $index) {
+                <div class="subtitle-line-container">
+                    <p [style.animation-delay]="'0.' + $index * 150 + 's'" class="subtitle-line">{{ line }}</p>
+                </div>
+            }
+        </div>
+
+        <div class="subtitle s-right">
+            @for(line of ['GOT AN IDEA IN MIND?', 'DON\'T BE SHY, CONTACT US!']; track $index) {
+                <div class="subtitle-line-container">
+                    <p [style.animation-delay]="'0.' + $index * 150 + 's'" class="subtitle-line">{{ line }}</p>
+                </div>
+            }
+        </div>
+
+        <p class="hero-ghost">LET'S GET IN TOUCH</p>
+    </div>
+    
+    <div class="arrows global-padding">
+        <img class="arrow-img" src="icons/arrow-down.svg" alt="">
+
+        <img class="arrow-img" src="icons/arrow-down.svg" alt="">
+    </div>
+</div>
+
+<app-footer [nextPageRoute]="'/work'" [nextPageTitle]="'OF OUR WORK'"></app-footer>

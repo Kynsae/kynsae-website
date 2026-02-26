@@ -1,0 +1,5 @@
+<div class="container">
+    @for (i of range; track i) {
+        <div class="line" [style.height]="getOpacity(i) * 10 + 25 + 'px'" [style.opacity]="getOpacity(i)"></div>
+    }
+</div>

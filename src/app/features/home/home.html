@@ -1,0 +1,101 @@
+<header [class.intro-animate]="navigationLoader.hasPageLoaded()" class="hero-section">
+  <app-circular-grid [fadeIn]="navigationLoader.hasPageLoaded()" [rotationProgress]="uiManager.heroNeonSphereProgress"></app-circular-grid>
+  <app-neon-sphere [playIntro]="navigationLoader.hasPageLoaded()" [ejectProgress]="uiManager.circularGridProgress"></app-neon-sphere>
+
+  <div class="hero-subtitle">
+    @for(word of ['WE', 'BRING', 'IDEAS', 'TO', 'LIFE', 'WITH', 'WATHEVER', 'TOOLS', 'THE', 'STORY', 'NEEDS']; track $index) {
+      <div>
+        <p class="hero-subtitle-word" [style]="uiManager.heroSubtitle">
+          {{ word }}
+        </p>
+      </div>
+    }
+  </div>
+
+  <div [style.maskImage]="uiManager.heroText" class="hero-text">
+    @for(word of ['WE BRING IDEAS', 'TO LIFE WITH', 'WATHEVER TOOLS', 'THE STORY NEEDS']; track $index) {
+      <p [style]="uiManager.heroTextTransform($index)" class="bouga">
+        {{ word }}
+      </p>
+    }
+  </div>
+</header>
+
+<app-star-rain (sceneReady)="updateSourceProgress(1, 100)" [percentage]="uiManager.starRainPercentage"></app-star-rain>
+
+<main>
+  <section aria-label="Featured Work" class="projects">
+    <div class="projects-header">
+      <p class="projects-header-title">FEATURED WORK</p>
+      <p class="projects-header-counter">{{projectsManager.getCount()}}</p>
+      <img class="arrow-icon" src="icons/arrow-bottom-right.svg" alt="Arrow pointing to featured work">
+    </div>
+    
+    <app-projects-grid [maxProjects]="4" (loadProgress)="updateSourceProgress(2, $event)"></app-projects-grid>
+  </section>
+  
+  <section #starSection class="star-section" aria-label="Our Services">
+    <div class="gradient"></div>
+    
+    <div (click)="navigate('/work')" class="button">
+      <app-text-hover-slide [text]="'VIEW OUR WORK'"/>
+    </div>
+  
+    <app-text-reveal 
+      [text]="'at kynsae we love to work on many things, such as..'"
+      [percentage]="uiManager.skillsText1Percentage"
+      [style.top]="uiManager.skillsText1Top"
+      class="skills-text"
+    ></app-text-reveal>
+  
+    <app-ascii-grid 
+      [texts]="asciiGridTexts"
+      [scrollPercentage]="uiManager.asciiGridPercentage"
+      [style.opacity]="uiManager.asciiGridOpacity"
+      class="ascii-grid"
+    ></app-ascii-grid>
+    
+    <app-text-reveal 
+      [text]="'this mix of tech let us build products with depth you can feel, not just see.'"
+      [percentage]="uiManager.skillsText2Percentage"
+      [useSpreadLayout]="true"
+      [ngStyle]="uiManager.skillsText2Style"
+      class="skills-text-2"
+    ></app-text-reveal>
+  
+    <app-star-exposure 
+      [animationProgress]="uiManager.starExposurePercentage"
+      [fov]="uiManager.starExposureFOV"
+      [trailLength]="uiManager.starExposureTrail"
+    ></app-star-exposure>
+  
+    <div class="hero-svg-container">
+      <p [style.transform]="uiManager.svgSubtitleTransform" class="subtitle">
+        <span>CRAFTING IDEAS</span>
+        <span>TO UNIQUE</span>
+      </p>
+  
+      <app-svg-animator 
+        [startPath]="animatedSVG.start" 
+        [endPath]="animatedSVG.end" 
+        [percentage]="uiManager.svgPercentage"
+        [style.transform]="uiManager.svgTransform"
+      ></app-svg-animator>
+    </div>
+  </section>
+</main>
+
+<div class="contact-section">
+  <div class="galaxy-container">
+    <app-galaxy></app-galaxy>
+
+    <p>READY TO PUSH YOUR IDEA FURTHER?</p>
+    <p class="title">LET'S MAKE IT HAPPEN!</p>
+
+    <img class="arrow-icon" src="icons/arrow-down.svg">
+  </div>
+
+  <div class="footer-container">
+    <app-footer [nextPageRoute]="'/about'" [nextPageTitle]="'ABOUT THE STUDIO'"></app-footer>
+  </div>
+</div>

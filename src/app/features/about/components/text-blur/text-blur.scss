@@ -1,0 +1,45 @@
+// Import the string module (REQUIRED)
+@use 'sass:string';
+
+:host {
+  display: block;
+}
+
+// -------- Core Span Style --------
+span {
+  opacity: 0;
+  filter: blur(30px);
+  animation: textAppearBlur 1.6s ease-in-out;
+  animation-fill-mode: both;
+  animation-delay: 9999s; // Very large default delay - will be overridden by inline style
+  // This prevents animation from starting until inline style is applied
+  // animation-fill-mode: both ensures opacity stays 0 during delay period
+}
+
+// -------- Keyframes --------
+@keyframes textAppearBlur {
+  from {
+    filter: blur(30px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+// -------- No-blur variant (keeps reveal opacity only) --------
+.no-blur {
+  animation-name: textAppearNoBlur;
+}
+
+@keyframes textAppearNoBlur {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

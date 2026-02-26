@@ -1,0 +1,37 @@
+<div class="mobile-container">
+    <div class="mobile-header">
+        <img (click)="navigate('/')" class="mobile-logo-img" src="icons/logo.svg" alt="home">
+    
+        <div (click)="openMobileMenu()" class="mobile-menu-button">
+            <img src="icons/menu.svg" alt="menu" [class.icon-hidden]="mobileMenuOpen()">
+            <img style="width: 16px;" src="icons/close-black.svg" alt="close" [class.icon-hidden]="!mobileMenuOpen()">
+        </div>
+    </div>
+
+    <div [class.menu-open]="mobileMenuOpen()" class="mobile-menu">
+        @for(route of MOBILE_ROUTES; track route.url) {
+            
+            <div style="overflow: hidden;">
+                <nav [style.transition-delay]="route.delay" class="route-nav" (click)="navigate(route.url)">
+                    <div class="active-route-indicator" [class.active]="isRouteActive(route.url)"></div>
+                    {{route.title}}
+                    <div class="active-route-indicator" [class.active]="isRouteActive(route.url)"></div>
+                </nav>
+            </div>
+        }
+    </div>
+</div>
+
+<div [class.background-open]="mobileMenuOpen()" class="mobile-background"></div>
+
+<div [class.show]="navigationLoader.hasPageLoaded()" class="container">
+    @for(route of ROUTES; track route.url) {
+        @if ($index == 2) {
+            <img (click)="navigate('/')" class="logo-img" src="icons/logo.svg" alt="home">
+        }
+
+        <nav [style.animation-delay]="route.delay" (click)="navigate(route.url)">
+            <app-text-hover-slide [underline]="false" [text]="route.title"></app-text-hover-slide>
+        </nav>
+    }
+</div>

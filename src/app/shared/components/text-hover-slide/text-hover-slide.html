@@ -1,0 +1,13 @@
+<div class="container" [class.force-active]="forceActive()">
+    @for(item of lettersWithDelay; track $index) {
+        <span class="real" [style.transition-delay]="item.delay">{{item.letter}}</span>
+
+        <span class="ghost">{{item.letter}}</span>
+
+        <span class="fake" [style.transition-delay]="item.delay">{{item.letter}}</span>
+    }
+
+    @if(underline()) {
+        <div class="line"></div>
+    }
+</div>

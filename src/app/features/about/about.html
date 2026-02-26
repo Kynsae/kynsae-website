@@ -1,0 +1,165 @@
+<app-pc-generated 
+    (loadProgress)="onLoadProgress($event)" 
+    [percentage]="uiManager.pcPercentage"
+    [style.transform]="uiManager.pcTransform"
+></app-pc-generated>
+
+<!-- <div [ngStyle]="uiManager.fakePlanet" class="fake-planet"></div> -->
+
+<div [class.intro-animate]="navigationLoader.hasPageLoaded()" class="scroll-container">
+    <div [style.transform]="uiManager.crossesTransform" class="cross-container global-padding">
+        <div class="cross-side">
+            <div class="blocker-v"></div>
+            
+            <img 
+                [style.transform]="uiManager.crossIcon1Transform" 
+                class="cross" 
+                src="icons/cross.svg"
+                alt="Decorative cross icon"
+            >
+            
+            <div 
+                [style.height]="uiManager.sideCrossHeight" 
+                class="blocker-v"
+            ></div>
+        </div>
+
+        <div [style.width]="uiManager.horizontalBlockerCenterHeight" class="blocker"></div>
+
+        <div class="cross-side-2">
+            <img class="cross" src="icons/cross.svg" alt="Decorative cross icon">
+        </div>
+
+        <div class="blocker"></div>
+
+        <div class="cross-side-2">
+            <img class="cross" src="icons/cross.svg" alt="Decorative cross icon">
+        </div>
+
+        <div [style.width]="uiManager.horizontalBlockerCenterHeight" class="blocker"></div>
+
+        <div class="cross-side cross-side-right">
+            <div class="blocker-v"></div>
+            
+            <img 
+                [style.transform]="uiManager.crossIcon4Transform" 
+                class="cross" 
+                src="icons/cross.svg"
+                alt="Decorative cross icon"
+            >
+
+            <div [style.height]="uiManager.sideCrossHeight" class="blocker-v"></div>
+        </div>
+    </div>
+
+    @if(navigationLoader.hasPageLoaded()) {
+        <div class="hero">
+            <div class="hero-title-wrapper">
+                <app-text-blur 
+                    class="main-title" 
+                    [delay]="0.1" 
+                    [text]="HERO_TITLE" 
+                    [style.transform]="uiManager.heroTitleTransform"
+                ></app-text-blur>
+            </div>
+    
+            <div class="hero-subtitle-wrapper">
+                <app-text-blur 
+                    [delay]="0.1" 
+                    [text]="HERO_SUBTITLE" 
+                    [style.transform]="uiManager.heroSubtitleTransform"
+                ></app-text-blur>
+            </div>
+        </div>
+    }
+
+    <div [style.opacity]="uiManager.whoOpacity" class="who global-padding">
+        <div class="top-left">
+            @for(line of WHO_TOP_LINES; track $index) {
+                <p [style.transform]="uiManager.whoTextTopTransform($index)">
+                    {{ line }}
+                </p>
+            }
+        </div>
+    
+        <div class="bottom-right">
+            @for(line of uiManager.whoBottomLines; track $index) {
+                <p [style.transform]="uiManager.whoTextBottomTransform($index)">
+                    {{ line }}
+                </p>
+            }
+        </div>
+    </div>
+
+    <div class="mission">
+        <p [ngStyle]="uiManager.missionTitle" class="subtitle">
+            @for(char of uiManager.missionSubtitle.split(''); track charIdx; let charIdx = $index) {
+                <span class="mission-letter" [style.opacity]="uiManager.getSubtitleLetterOpacity(charIdx)">{{char}}</span>
+            }
+        </p>
+        
+        @for(line of uiManager.missionLines; track $index; let lineIdx = $index) {
+            <p [ngStyle]="uiManager.missionText(lineIdx)">
+                @for(char of line.split(''); track charIdx; let charIdx = $index) {
+                    <span class="mission-letter" [style.opacity]="uiManager.getLetterOpacity(lineIdx, charIdx)">{{char}}</span>
+                }
+            </p>
+        }
+    </div>
+
+    <div class="location">
+        <div class="morph-text global-padding">
+            <p [ngStyle]="uiManager.location1Title">SWISS</p>
+            
+            <div [style.flex-grow]="uiManager.location1SpacerGrow" class="spacer">
+                <p [ngStyle]="uiManager.location1Text" class="center-text">
+                    {{ LOCATION_TEXT }}
+                </p>
+            </div> 
+
+            <p [ngStyle]="uiManager.location1Title">MADE</p>
+        </div>
+    </div>
+
+    <div class="location">
+        <div class="morph-text global-padding">
+            <p [ngStyle]="uiManager.location2Title">GEN</p>
+            
+            <div class="spacer spacer-fixed">
+                <p [ngStyle]="uiManager.location2Text" class="center-text">
+                    {{ LOCATION_TEXT }}
+                </p>
+            </div> 
+
+            <p [ngStyle]="uiManager.location2Title">EVA</p>
+        </div>
+    </div>
+
+    <div [ngStyle]="uiManager.skills" class="skills global-padding">
+        <div class="title-container">
+            <div class="main-title">
+                @for(line of SKILLS_TITLE_LINES; track $index) {
+                    <p [style.transform]="uiManager.skillsLine($index)">
+                        {{ line }}
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="list">
+            @for(skill of SKILLS; track $index) {
+                <div class="content">
+                    <p [ngStyle]="uiManager.skillsSubtitle" class="subtitle">{{ skill.category }}</p>
+    
+                    <div>
+                        @for(entry of skill.entries; track $index) {
+                            <p [ngStyle]="uiManager.skillsText($index)">{{ entry }}</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<app-footer [nextPageRoute]="'/home'" [nextPageTitle]="'HOME'"></app-footer>

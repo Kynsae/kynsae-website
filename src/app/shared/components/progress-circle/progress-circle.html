@@ -1,0 +1,29 @@
+<div [class.hide]="hide()" class="progress-circle-container" [style.width.px]="size()" [style.height.px]="size()">
+  <svg [attr.width]="size()" [attr.height]="size()" class="progress-svg">
+    <!-- Background circle -->
+    <circle
+      class="progress-background"
+      [attr.cx]="size() / 2"
+      [attr.cy]="size() / 2"
+      [attr.r]="radius"
+      [attr.stroke-width]="strokeWidth()"
+      [attr.fill]="'none'"
+      [style.opacity]="hide() ? 0 : 1"
+    />
+    <!-- Progress circle -->
+    <circle
+      class="progress-circle"
+      [attr.cx]="size() / 2"
+      [attr.cy]="size() / 2"
+      [attr.r]="radius"
+      [attr.stroke-width]="strokeWidth()"
+      [attr.fill]="'none'"
+      [attr.stroke]="color()"
+      [attr.stroke-dasharray]="circumference"
+      [attr.stroke-dashoffset]="offset"
+      [style.opacity]="shouldShowProgress ? 1 : 0"
+    />
+  </svg>
+  
+  <img class="arrow-icon" src="icons/arrow-down.svg" alt="">
+</div>

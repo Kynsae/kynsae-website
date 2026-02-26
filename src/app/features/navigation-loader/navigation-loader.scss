@@ -1,0 +1,133 @@
+:host {
+    position: fixed;
+    inset: 0;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: opacity .9s ease-in-out, visibility .9s;
+    contain: strict;
+    view-transition-name: loader;
+    
+
+    // CSS custom property for dynamic value - single binding, CSS cascades to children
+    --dash-offset: 196.35;
+
+    &.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.logo-wrapper {
+    position: relative;
+    width: 50px;
+    aspect-ratio: 1;
+    contain: layout style;
+}
+
+.logo-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    contain: layout style paint;
+}
+
+.progress-ring__arc {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 18.1;
+    stroke-dasharray: 196.35 392.7;
+    stroke-linecap: round;
+    stroke-dashoffset: var(--dash-offset);
+    transition: stroke-dashoffset .5s ease-in-out, opacity .2s ease-in-out;
+    transform-origin: center;
+    will-change: stroke-dashoffset;
+    opacity: 0;
+
+    // Arc visible when host has class
+    :host(.arc-visible) & {
+        opacity: 1;
+    }
+
+    // Complete animation triggered by host class
+    :host(.complete) & {
+        stroke-dashoffset: 0;
+        animation: arcComplete .35s ease-in-out forwards;
+        animation-delay: .25s;
+    }
+
+    &--left {
+        transform: scaleY(-1) rotate(-90deg);
+    }
+    
+    &--right {
+        transform: rotate(90deg);
+    }
+}
+
+.logo-bar {
+    animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+    // Complete animation triggered by host class
+    :host(.complete) & {
+        animation: slideOut 0.2s cubic-bezier(.87,.16,.83,.67) both;
+    }
+
+    &--left {
+        animation-delay: 0.1s;
+
+        :host(.complete) & {
+            animation-delay: 0.35s;
+        }
+    }
+
+    &--right {
+        animation-delay: 0.3s;
+
+        :host(.complete) & {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+@keyframes arcComplete {
+    from {
+        rotate: 180deg;
+        stroke-dashoffset: 0;
+    }
+    99.9% {
+        rotate: 180deg;
+        stroke-dashoffset: 197;
+        opacity: 1;
+    }
+    to {
+        rotate: 180deg;
+        stroke-dashoffset: 197;
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+}

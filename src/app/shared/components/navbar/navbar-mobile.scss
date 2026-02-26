@@ -1,0 +1,136 @@
+@media (max-width: 850px) {
+    .mobile-container {
+        display: flex !important;
+    }
+
+    .container {
+        display: none !important;
+    }
+}
+
+.mobile-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10px;
+    z-index: 150;
+    
+    display: none;
+    flex-direction: column;
+}
+
+.mobile-header {
+    height: 105px;
+    padding: var(--padding);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.mobile-logo-img {
+    height: 100%;
+}
+
+.mobile-menu-button {
+    height: 100%;
+    aspect-ratio: 1;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    position: relative;
+
+    img {
+        position: absolute;
+        width: 20px;
+        aspect-ratio: 1;
+        object-fit: contain;
+        opacity: 1;
+        transition: opacity 0.25s ease;
+    }
+
+    .icon-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.mobile-menu {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    height: calc(100vh - 160px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    padding: calc(var(--padding) * 2);
+    box-sizing: border-box;
+    pointer-events: none;
+
+    opacity: 0;
+    transition: all .7s cubic-bezier(1, 0, .39, .86);
+
+    .route-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--padding);
+        white-space: nowrap;
+        transform: translateY(-100%);
+        transition: transform .6s cubic-bezier(1, 0, .39, .86);
+    }
+}
+
+.menu-open {
+    opacity: 1;
+    pointer-events: all;
+
+    .route-nav {
+        transform: translateY(0%);
+    }
+}
+
+.active-route-indicator {
+    width: 8px;
+    aspect-ratio: 1;
+    background-color: white;
+    opacity: 0;
+
+    &.active {
+        opacity: 1;
+    }
+}
+
+.mobile-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2a4076;
+    mix-blend-mode: darken;
+    z-index: 149;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    pointer-events: none;
+
+    transition: all .7s cubic-bezier(1, 0, .39, .86);
+}
+
+.background-open {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+    pointer-events: all;
+}

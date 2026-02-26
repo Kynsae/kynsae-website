@@ -1,0 +1,14 @@
+<div class="text-container">
+    @for(word of text().split(' '); track $index; let wordIndex = $index; let last = $last) {
+      <div class="word">
+        @for(char of word; track $index) {
+          <span class="letter" [ngClass]="{ 'revealed': isRevealed(wordIndex, $index), 'hidden': !isRevealed(wordIndex, $index) }">
+            {{ char }}
+          </span>
+        }
+      </div>
+      @if (useSpreadLayout() && !last) {
+        <span class="spacer" aria-hidden="true"></span>
+      }
+    }
+</div>

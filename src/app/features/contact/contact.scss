@@ -1,0 +1,93 @@
+@keyframes arrows-intro {
+    from {
+        bottom: 10%;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 0%;
+        opacity: 1;
+    }
+}
+
+@keyframes subtitle-line-intro {
+    from {
+        transform: translateY(100%) scale(0.9);
+    }
+
+    to {
+        transform: translateY(0%) scale(1);
+    }
+}
+
+.intro-animate {
+    .arrows {
+        animation: arrows-intro 1s cubic-bezier(1, 0, .39, .86) .2s forwards;
+    }
+
+    .subtitle-line {
+        animation: subtitle-line-intro 1.6s cubic-bezier(1, 0, .39, .86) forwards;
+    }
+}
+
+.hero {
+    height: 100vh;
+
+    .hero-title-container {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+
+        display: flex;
+        justify-content: center;
+
+        .hero-ghost {
+            font-size: calc(8.41vw - 6.4px);
+            font-family: 'Gothic', 'arial';
+            visibility: hidden;
+        }
+
+        .subtitle {
+            position: absolute;
+            transform: translateY(-70%);
+            font-size: 1.2vw;
+
+            .subtitle-line-container {
+                overflow: hidden;
+
+                .subtitle-line {
+                    transform: translateY(100%);
+                }
+            }
+        }
+
+        .s-left {
+            left: var(--padding);
+        }
+
+        .s-right {
+            right: var(--padding);
+            text-align: right;
+        }
+    }
+}
+
+.arrows {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+
+    .arrow-img {
+        width: 25px;
+    }
+}
+
+app-torus {
+    display: block;
+    height: 100vh;
+}

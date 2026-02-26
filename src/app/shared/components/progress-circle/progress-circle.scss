@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.progress-circle-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.progress-svg {
+  transform: rotate(-90deg);
+}
+
+.progress-background {
+  stroke: rgba(255, 255, 255, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+.progress-circle {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  transition: all .2s cubic-bezier(1, 0, .39, .86);
+}
+
+.hide {
+  .arrow-icon {
+    transform: translate(-50%, 0%);
+    opacity: 0;
+  }
+}

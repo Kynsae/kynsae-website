@@ -1,0 +1,23 @@
+<div #container class="container">
+    @for(project of projects; track $index) {
+        <div (click)="navigate(project.id)" class="project">
+            <div class="tags">
+                @for(tag of project.tags; track $index) {
+                    <div class="tag">
+                        {{ tag }}
+                    </div>
+                }
+            </div>
+
+            <img [style.transform]="transform($index)" class="project-thumbnail" [src]="project.thumbnail">
+
+            <div class="title">
+                {{ project.title }}
+
+                <img class="arrow-icon" src="icons/arrow-top-right.svg">
+            </div>
+
+            <div class="fader"></div>
+        </div>
+    }
+</div>

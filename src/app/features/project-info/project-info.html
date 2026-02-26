@@ -1,0 +1,95 @@
+<main>
+    <app-carousel [project]="project" (progressPercent)="uiManager.onProgressPercent($event)"></app-carousel>
+
+    <app-progress-lines [progressPercent]="uiManager.progressPercent()"></app-progress-lines>
+
+    <img [style.transform]="uiManager.flareLayerTransform" class="flare-layer" src="images/flares.webp"
+        alt="Flare background effect">
+
+    <div [style.transform]="uiManager.fakeCarouselTransform" class="fake-carousel">
+        <img [src]="project.thumbnail" [alt]="project.title + ' - Project thumbnail'">
+
+        @for(media of project.medias; track $index) {
+            @if(media.type === 'image') {
+                <img [src]="media.url">
+            }
+
+            @if(media.type === 'video') {
+                <video autoplay muted loop [src]="media.url"></video>
+            }
+        }
+    </div>
+
+    <div (click)="navigateBack()" class="back-btn">
+        <img class="back-img" src="icons/arrow-left.svg" alt="Go back">
+
+        <img class="back-img-2" src="icons/arrow-left.svg" alt="" aria-hidden="true">
+    </div>
+
+    <article class="infos global-padding">
+        <div [ngStyle]="uiManager.wrapperStyle" class="wrapper">
+            <div class="section">
+                <p [style.transform]="uiManager.sectionNameTransform" class="section-name">TITLE</p>
+
+                <div class="section-content">
+                    <p [style.transform]="uiManager.sectionContentTransform" class="title">{{project.title}}</p>
+                </div>
+            </div>
+
+            <div [style.width]="uiManager.separatorWidth" class="separator"></div>
+
+            <div class="section">
+                <p [style.transform]="uiManager.sectionNameTransform" class="section-name">DESCRIPTION</p>
+
+                <div class="section-content">
+                    <p [style.transform]="uiManager.sectionContentTransform">
+                        {{project.description}}
+                    </p>
+                </div>
+            </div>
+
+            <div [style.width]="uiManager.separatorWidth" class="separator"></div>
+
+            <div class="flex-equal">
+                <div>
+                    <div class="section">
+                        <p [style.transform]="uiManager.sectionNameTransform" class="section-name">ROLES</p>
+
+                        <div class="section-content">
+                            <p [style.transform]="uiManager.sectionContentTransform">
+                                {{ project.services.join(' / ') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div [style.width]="uiManager.separatorWidth" class="separator"></div>
+                </div>
+
+                <div [style.transform]="uiManager.releaseSectionTransform">
+                    <div class="section">
+                        <p [style.transform]="uiManager.sectionNameTransform" class="section-name">RELEASE</p>
+
+                        <div class="section-content">
+                            <p [style.transform]="uiManager.sectionContentTransform">
+                                {{ project.year }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div [style.width]="uiManager.separatorWidth" class="separator"></div>
+                </div>
+            </div>
+
+            @if(project.websiteUrl) {
+            <div [style.transform]="uiManager.buttonTransform" (click)="onLaunchProject()" class="button">
+                <div class="background">
+                    LAUNCH PROJECT
+                </div>
+                <div class="arrow"></div>
+
+                <p>LAUNCH PROJECT</p>
+            </div>
+            }
+        </div>
+    </article>
+</main>

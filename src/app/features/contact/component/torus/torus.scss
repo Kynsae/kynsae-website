@@ -1,0 +1,10 @@
+.torus-container {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 800ms ease;
+    will-change: opacity;
+}
+
+.torus-container.visible {
+    opacity: 1;
+}

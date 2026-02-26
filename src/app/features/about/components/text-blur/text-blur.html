@@ -1,0 +1,12 @@
+<p>
+    @for (item of lettersWithDelay; track $index) {
+        @if (item.letter === '\n') {
+            <br />
+        } @else {
+            <span 
+                [ngClass]="disableBlur() ? 'no-blur' : ''"
+                [style.animation-delay]="item.delay + 's'"
+            >{{ item.letter }}</span>
+        }
+    }
+</p>
