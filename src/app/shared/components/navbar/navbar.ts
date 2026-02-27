@@ -74,6 +74,15 @@ export class Navbar {
     this.router.navigateByUrl(route);
   }
 
+  public openExternal(url: string): void {
+    this.mobileMenuOpen.set(false);
+    window.open(url, '_blank', 'noopener');
+  }
+
+  public isExternal(url: string): boolean {
+    return url.startsWith('http://') || url.startsWith('https://');
+  }
+
   public openMobileMenu(): void {
     this.mobileMenuOpen.set(!this.mobileMenuOpen());
   }

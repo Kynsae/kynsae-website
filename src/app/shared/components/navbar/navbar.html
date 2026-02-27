@@ -12,7 +12,10 @@
         @for(route of MOBILE_ROUTES; track route.url) {
             
             <div style="overflow: hidden;">
-                <nav [style.transition-delay]="route.delay" class="route-nav" (click)="navigate(route.url)">
+                <nav
+                    [style.transition-delay]="route.delay"
+                    class="route-nav"
+                    (click)="isExternal(route.url) ? openExternal(route.url) : navigate(route.url)">
                     <div class="active-route-indicator" [class.active]="isRouteActive(route.url)"></div>
                     {{route.title}}
                     <div class="active-route-indicator" [class.active]="isRouteActive(route.url)"></div>
@@ -30,7 +33,9 @@
             <img (click)="navigate('/')" class="logo-img" src="icons/logo.svg" alt="home">
         }
 
-        <nav [style.animation-delay]="route.delay" (click)="navigate(route.url)">
+        <nav
+            [style.animation-delay]="route.delay"
+            (click)="isExternal(route.url) ? openExternal(route.url) : navigate(route.url)">
             <app-text-hover-slide [underline]="false" [text]="route.title"></app-text-hover-slide>
         </nav>
     }
