@@ -16,7 +16,7 @@ export class Navbar {
   protected readonly ROUTES = [
     { 
       title: 'Σ LAB', 
-      url: 'www.google.com', 
+      url: 'https://lab.kynsae.com/', 
       delay: '.0s' 
     },
     { 
@@ -59,7 +59,7 @@ export class Navbar {
     },
     { 
       title: 'Σ THE LAB', 
-      url: 'www.google.com', 
+      url: 'https://lab.kynsae.com/', 
       delay: '.12s' 
     },
   ];
