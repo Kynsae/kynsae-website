@@ -21,9 +21,5 @@ export const routes: Routes = [
         path: "about", 
         loadComponent: () => import('./features/about/about').then(m => m.About)
     },
-    { 
-        path: "lab", 
-        loadComponent: () => import('./features/lab/lab').then(m => m.Lab)
-    },
     { path: '**', redirectTo: '' }
 ];
