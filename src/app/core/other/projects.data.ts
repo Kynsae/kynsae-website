@@ -51,6 +51,7 @@ export const PROJECTS_DATA: readonly Project[] = [
       { type: 'image', url: 'projects/techno-posters/4.webp'},
       { type: 'image', url: 'projects/techno-posters/5.webp'},
       { type: 'image', url: 'projects/techno-posters/6.webp'},
+      { type: 'image', url: 'projects/techno-posters/7.webp'},
     ],
     year: '2025'
   },
