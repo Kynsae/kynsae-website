@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://kynsae.com/sitemap.xml
+Sitemap: https://kynsae.com/seo/sitemap.xml
 
 # Disallow admin/private areas (if any)
 Disallow: /admin/

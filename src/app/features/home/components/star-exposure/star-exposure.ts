@@ -98,7 +98,7 @@ export class StarExposure implements AfterViewInit, OnDestroy {
   }
 
   private loadGLB(): void {
-    this.loader.load('cam.glb', (gltf) => {
+    this.loader.load('webgl-ressources/cam.glb', (gltf) => {
       gltf.scene.traverse((child) => { this.loadedCamera = child as THREE.Camera; });
       if (this.loadedCamera) {
         this.camera.updateProjectionMatrix();
