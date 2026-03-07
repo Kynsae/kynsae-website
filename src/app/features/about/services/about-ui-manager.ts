@@ -12,18 +12,13 @@ export class AboutUIManager {
   private readonly fadeRange = 0.15;
   private readonly fadeMargin = this.fadeRange / 2;
   
-  // Content constants
-  public readonly missionSubtitle = 'OUR MISSION';
-  public readonly missionLines = ['WE MIX CREATIVITY AND', 'TECH TO MAKE YOUR PROJECT', 'STAND OUT'];
-  public readonly whoBottomLines = ['WE MIX CREATIVITY AND', 'TECH TO MAKE YOUR PROJECT', 'STAND OUT'];
-  
+  // Content constants (used only for letter animation thresholds)
+  private readonly missionSubtitle = 'OUR MISSION';
+  private readonly missionLines = ['DESIGN DRIVEN BY', 'PRECISION, DETAIL', 'AND EXPERIMENTATION'];
+
   // Threshold arrays for letter animations
   private readonly subtitleThresholds = this.missionSubtitle.split('').map(() => this.fadeMargin + Math.random() * (1 - this.fadeRange));
   private readonly letterThresholds = this.missionLines.map(line => line.split('').map(() => this.fadeMargin + Math.random() * (1 - this.fadeRange)));
-
-  public getSubtitleLetterOpacity(charIndex: number): number {
-    return this.getLetterOpacity(-1, charIndex);
-  }
 
   public getLetterOpacity(lineIndex: number, charIndex: number): number {
     const threshold = lineIndex === -1 ? this.subtitleThresholds[charIndex] : this.letterThresholds[lineIndex]?.[charIndex];
@@ -120,13 +115,6 @@ export class AboutUIManager {
 
   // MISSION SECTION
 
-  get missionTitle() {
-    return {
-      'transform': `translateY(${ this.lerp(100, 0, 3.7, 3.7, 'ease-in-out') }%)`,
-      'opacity': this.lerp(0, 1, 3.7, 3.7, 'ease-in-out')
-    }
-  }
-
   public missionText(lineIdx: number) {
     return {
       'transform': `translateY(${ this.lerp(100 + lineIdx * 100, 0, 3.5, 4, 'ease-in-out') }%)`,
@@ -138,8 +126,8 @@ export class AboutUIManager {
 
   get location1Title() {
     return {
-      'transform': 'translateY(' + (this.lerp(100, 0, 5.8, 6, 'ease-in-out') - this.lerp(0, 100, 7.9, 8.1, 'ease-in-out')) + '%)',
-      'opacity': this.lerp(0, 1, 5.9, 6, 'ease-in-out') * this.lerp(1, 0, 7.8, 7.6, 'ease-in-out')
+      'transform': 'translateY(' + (this.lerp(100, 0, 5.8, 6, 'ease-in-out') - this.lerp(0, 100, 8.5, 9.2, 'ease-in-out')) + '%)',
+      'opacity': this.lerp(0, 1, 5.9, 6, 'ease-in-out') * this.lerp(1, 0, 8.3, 8.7, 'ease-in-out')
     };
   }
 
@@ -149,22 +137,8 @@ export class AboutUIManager {
 
   get location1Text() {
     return {
-      'transform': `translate(-50%, -${ this.lerp(50, 200, 7.9, 7.9, 'ease-in-out') }%)`,
-      'opacity': this.lerp(0, 1, 7.2, 7, 'ease-in-out') * this.lerp(1, 0, 7.8, 7.6, 'ease-in-out')
-    };
-  }
-
-  get location2Title() {
-    return {
-      'transform': `translateY(${ this.lerp(100, 0, 8, 8.2, 'ease-in-out') - this.lerp(0, 100, 9, 9.2, 'ease-in-out') }%)`,
-      'opacity': this.lerp(0, 1, 8.3, 8.3, 'ease-in-out') * this.lerp(1, 0, 8.8, 8.7, 'ease-in-out')
-    };
-  }
-
-  get location2Text() {
-    return {
-      'transform': `translate(-50%, ${ this.lerp(200, -50, 7.8, 8, 'ease-in-out') + this.lerp(0, -200, 8.9, 9.1, 'ease-in-out') }%)`,
-      'opacity': this.lerp(0, 1, 8.3, 8.3, 'ease-in-out') * this.lerp(1, 0, 8.8, 8.7, 'ease-in-out')
+      'transform': `translate(-50%, -${ this.lerp(50, 200, 8.4, 9.1, 'ease-in-out') }%)`,
+      'opacity': this.lerp(0, 1, 7.2, 7, 'ease-in-out') * this.lerp(1, 0, 8.3, 8.7, 'ease-in-out')
     };
   }
 

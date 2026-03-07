@@ -56,7 +56,7 @@
                 <app-text-blur 
                     class="main-title" 
                     [delay]="0.1" 
-                    [text]="HERO_TITLE" 
+                    text="THIS IS KYNSAE" 
                     [style.transform]="uiManager.heroTitleTransform"
                 ></app-text-blur>
             </div>
@@ -64,7 +64,7 @@
             <div class="hero-subtitle-wrapper">
                 <app-text-blur 
                     [delay]="0.1" 
-                    [text]="HERO_SUBTITLE" 
+                    text="SCROLL TO EXPLORE" 
                     [style.transform]="uiManager.heroSubtitleTransform"
                 ></app-text-blur>
             </div>
@@ -73,7 +73,7 @@
 
     <div [style.opacity]="uiManager.whoOpacity" class="who global-padding">
         <div class="top-left">
-            @for(line of WHO_TOP_LINES; track $index) {
+            @for(line of ['KYNSAE IS A', 'CREATIVE PRODUCTION STUDIO', 'BLENDING DESIGN AND']; track $index) {
                 <p [style.transform]="uiManager.whoTextTopTransform($index)">
                     {{ line }}
                 </p>
@@ -81,7 +81,7 @@
         </div>
     
         <div class="bottom-right">
-            @for(line of uiManager.whoBottomLines; track $index) {
+            @for(line of ['TECHNOLOGY TO CREATE', 'STANDOUT DIGITAL', 'EXPERIENCES']; track $index) {
                 <p [style.transform]="uiManager.whoTextBottomTransform($index)">
                     {{ line }}
                 </p>
@@ -90,13 +90,7 @@
     </div>
 
     <div class="mission">
-        <p [ngStyle]="uiManager.missionTitle" class="subtitle">
-            @for(char of uiManager.missionSubtitle.split(''); track charIdx; let charIdx = $index) {
-                <span class="mission-letter" [style.opacity]="uiManager.getSubtitleLetterOpacity(charIdx)">{{char}}</span>
-            }
-        </p>
-        
-        @for(line of uiManager.missionLines; track $index; let lineIdx = $index) {
+        @for(line of ['DESIGN DRIVEN BY', 'PRECISION, DETAIL', 'AND EXPERIMENTATION']; track $index; let lineIdx = $index) {
             <p [ngStyle]="uiManager.missionText(lineIdx)">
                 @for(char of line.split(''); track charIdx; let charIdx = $index) {
                     <span class="mission-letter" [style.opacity]="uiManager.getLetterOpacity(lineIdx, charIdx)">{{char}}</span>
@@ -111,7 +105,7 @@
             
             <div [style.flex-grow]="uiManager.location1SpacerGrow" class="spacer">
                 <p [ngStyle]="uiManager.location1Text" class="center-text">
-                    {{ LOCATION_TEXT }}
+                    Grounded in Geneva, reaching audiences worldwide.
                 </p>
             </div> 
 
@@ -119,24 +113,10 @@
         </div>
     </div>
 
-    <div class="location">
-        <div class="morph-text global-padding">
-            <p [ngStyle]="uiManager.location2Title">GEN</p>
-            
-            <div class="spacer spacer-fixed">
-                <p [ngStyle]="uiManager.location2Text" class="center-text">
-                    {{ LOCATION_TEXT }}
-                </p>
-            </div> 
-
-            <p [ngStyle]="uiManager.location2Title">EVA</p>
-        </div>
-    </div>
-
     <div [ngStyle]="uiManager.skills" class="skills global-padding">
         <div class="title-container">
             <div class="main-title">
-                @for(line of SKILLS_TITLE_LINES; track $index) {
+                @for(line of ['AREA', 'OF', 'EXPERTISE']; track $index) {
                     <p [style.transform]="uiManager.skillsLine($index)">
                         {{ line }}
                     </p>
@@ -145,17 +125,30 @@
         </div>
 
         <div class="list">
-            @for(skill of SKILLS; track $index) {
-                <div class="content">
-                    <p [ngStyle]="uiManager.skillsSubtitle" class="subtitle">{{ skill.category }}</p>
-    
-                    <div>
-                        @for(entry of skill.entries; track $index) {
-                            <p [ngStyle]="uiManager.skillsText($index)">{{ entry }}</p>
-                        }
-                    </div>
+            <div class="content">
+                <p [ngStyle]="uiManager.skillsSubtitle" class="subtitle">INTERACTIVE</p>
+                <div>
+                    <p [ngStyle]="uiManager.skillsText(0)">3D MODELING</p>
+                    <p [ngStyle]="uiManager.skillsText(1)">BLENDER</p>
+                    <p [ngStyle]="uiManager.skillsText(2)">UNREAL ENGINE</p>
                 </div>
-            }
+            </div>
+            <div class="content">
+                <p [ngStyle]="uiManager.skillsSubtitle" class="subtitle">DESIGN</p>
+                <div>
+                    <p [ngStyle]="uiManager.skillsText(0)">GRAPHIC DESIGN</p>
+                    <p [ngStyle]="uiManager.skillsText(1)">UI/UX</p>
+                    <p [ngStyle]="uiManager.skillsText(2)">BRANDING</p>
+                </div>
+            </div>
+            <div class="content">
+                <p [ngStyle]="uiManager.skillsSubtitle" class="subtitle">DEVELOPMENT</p>
+                <div>
+                    <p [ngStyle]="uiManager.skillsText(0)">ANGULAR</p>
+                    <p [ngStyle]="uiManager.skillsText(1)">TYPESCRIPT</p>
+                    <p [ngStyle]="uiManager.skillsText(2)">WEB DEVELOPMENT</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

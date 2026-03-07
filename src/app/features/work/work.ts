@@ -40,7 +40,7 @@ export class Work implements OnInit {
     this.seoSchemas.addPortfolioSchema(this.projectsManager.getAll());
 
     this.seoManager.updateTags({
-      title: 'Kynsae - Our Work',
+      title: 'Kynsae - Work',
       description: 'Explore our portfolio of web design, 3D renders, mobile development, and creative projects.',
       keywords: 'portfolio, web design projects, 3D projects, creative work, case studies',
       type: 'website'

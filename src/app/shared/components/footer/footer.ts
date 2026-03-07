@@ -33,20 +33,24 @@ export class Footer implements AfterViewInit, OnDestroy {
   public readonly SOCIAL_LINKS: Link[] = [
     {
       label: 'INSTAGRAM',
-      url: 'https://instagram.com/'
+      url: 'https://instagram.com/notkynsae'
     },
     {
       label: 'GITHUB',
-      url: 'https://instagram.com/'
+      url: 'https://github.com/kynsae'
     },
     {
-      label: 'AWWWARDS',
-      url: 'https://instagram.com/'
+      label: 'X.COM',
+      url: 'https://x.com/kynsae'
+    },
+    {
+      label: 'ARTSTATION',
+      url: 'https://artstation.com/kynsae'
     },
     {
       label: 'BEHANCE',
-      url: 'https://instagram.com/'
-    },
+      url: 'https://behance.com/kynsae'
+    }
   ];
 
   public readonly CONTACT_LINKS: Link[] = [
