@@ -13,6 +13,7 @@ const vec3 seed1 = vec3(-2.57, 0.98, -1.46);
 const vec3 seed2 = vec3(1.12, 2.44, -0.77);
 
 attribute vec3 modelPosition;
+attribute float size;
 varying float vIntensity;
 varying float vMouseInfluence;
 
@@ -285,8 +286,10 @@ void main() {
   }
 
   morphed += genMouseNoise(morphed);
-  vIntensity = clamp((nearest * waveMix), 0.0, 1.0);
+  float rawIntensity = clamp((nearest * waveMix), 0.0, 1.0);
+  // Remap: filaments (high intensity) brighter, other particles slightly darker
+  vIntensity = clamp(rawIntensity * (0.7 + 0.28 * rawIntensity), 0.0, 1.0);
 
   gl_Position = projectionMatrix * (modelViewMatrix * vec4(morphed, 1.0));
-  gl_PointSize = uSize;
+  gl_PointSize = uSize * size;
 }

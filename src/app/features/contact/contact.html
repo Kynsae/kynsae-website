@@ -3,7 +3,7 @@
 
     <div class="hero-title-container">
         <div class="subtitle s-left">
-            @for(line of ['YOU LIKE DISLIKE OUR PROJECTS?', 'LET US KNOW!']; track $index) {
+            @for(line of ['YOU LIKE OUR PROJECTS?', 'LET US KNOW!']; track $index) {
                 <div class="subtitle-line-container">
                     <p [style.animation-delay]="'0.' + $index * 150 + 's'" class="subtitle-line">{{ line }}</p>
                 </div>

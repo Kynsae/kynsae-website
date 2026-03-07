@@ -2,19 +2,6 @@ app-pc-generated {
     will-change: transform;
 }
 
-.fake-planet {
-    position: fixed;
-    width: 200vw;
-    aspect-ratio: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 0%);
-    border-radius: 100%;
-    background: radial-gradient(circle, rgba(0, 0, 0, 1) 67%, rgba(255, 255, 255, 1) 70.7%);
-    mix-blend-mode: color-dodge;
-    will-change: top, background;
-}
-
 .scroll-container {
     position: relative;
     height: 1150vh;

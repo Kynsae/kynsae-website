@@ -65,16 +65,6 @@ export class AboutUIManager {
     return `translateY(${ this.lerp(0, -120, 11, 11.8, 'ease-in-out') }%)`;
   }
 
-  // FAKE PLANET
-
-  get fakePlanet() {
-    return {
-      'top': this.lerp(60, 48, 9.8, 9.8, 'ease-in-out') - this.lerp(0, 95, 11, 11.7, 'ease-in-out') + '%',
-      'background-position-y': this.lerp(-150, 0, 9.8, 9.8, 'ease-in-out') + 'px',
-      'background-size': this.lerp(110, 100, 9.8, 9.8, 'ease-in-out') + '%'
-    };
-  }
-
   // HERO
 
   get heroTitleTransform() {

@@ -11,6 +11,8 @@ export class PCGeneratedManager {
   private currentDrawCount = 0;
   private positions!: Float32Array;
   private positionAttr!: THREE.BufferAttribute;
+  private sizes!: Float32Array;
+  private sizeAttr!: THREE.BufferAttribute;
   private modelPositions!: Float32Array;
   private modelPositionAttr!: THREE.BufferAttribute;
   private readonly tmpRay = new THREE.Ray();
@@ -33,12 +35,14 @@ export class PCGeneratedManager {
   private readonly POINT_COUNT = 450000;
   private readonly SPHERE_RADIUS = 6.5;
   private readonly EXPLODE_DURATION = 0.13;
-  // > 1.0 makes the intro explosion start slower (stronger ease-in) while keeping a smooth settle.
-  private readonly EXPLODE_EASE_IN_POWER = 5;
   private readonly MOUSE_INFLUENCE_RADIUS = 4.5;
   private readonly MOUSE_STRENGTH = 0.6;
   private readonly MOUSE_SMOOTH_TIME = 0.2;
   private readonly MORPH_SMOOTH_TIME = 0.08;
+  /** Fraction of particles that get the large size (e.g. 0.01 = 1% rare) */
+  private readonly RARE_SIZE_FRACTION = 0.01;
+  /** Size multiplier for rare particles (base uSize * this) */
+  private readonly RARE_SIZE_MULT = 2.0;
 
   private readonly worker = new Worker(
     new URL('../pc-generated.worker.ts', import.meta.url),
@@ -98,11 +102,24 @@ export class PCGeneratedManager {
   public init(): THREE.BufferGeometry {
     this.positions = new Float32Array(this.POINT_COUNT * 3);
     this.modelPositions = new Float32Array(this.POINT_COUNT * 3);
+    this.sizes = new Float32Array(this.POINT_COUNT);
+    this.sizes.fill(1.0);
+    const rareCount = Math.max(1, Math.floor(this.POINT_COUNT * this.RARE_SIZE_FRACTION));
+    let seed = 0x9e37_79b9;
+    for (let n = 0; n < rareCount; n++) {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      const i = (seed >>> 0) % this.POINT_COUNT;
+      this.sizes[i] = this.RARE_SIZE_MULT;
+    }
 
     const geometry = new THREE.BufferGeometry();
     this.positionAttr = new THREE.BufferAttribute(this.positions, 3);
     this.positionAttr.setUsage(THREE.DynamicDrawUsage);
     geometry.setAttribute('position', this.positionAttr);
+
+    this.sizeAttr = new THREE.BufferAttribute(this.sizes, 1);
+    this.sizeAttr.setUsage(THREE.StaticDrawUsage);
+    geometry.setAttribute('size', this.sizeAttr);
     
     this.modelPositionAttr = new THREE.BufferAttribute(this.modelPositions, 3);
     this.modelPositionAttr.setUsage(THREE.StaticDrawUsage);
