@@ -90,7 +90,7 @@
     </div>
 
     <div class="mission">
-        @for(line of ['DESIGN DRIVEN BY', 'PRECISION, DETAIL', 'AND EXPERIMENTATION']; track $index; let lineIdx = $index) {
+        @for(line of ['DESIGN DRIVEN BY', 'PRECISION, DETAIL', 'AND PASSION']; track $index; let lineIdx = $index) {
             <p [ngStyle]="uiManager.missionText(lineIdx)">
                 @for(char of line.split(''); track charIdx; let charIdx = $index) {
                     <span class="mission-letter" [style.opacity]="uiManager.getLetterOpacity(lineIdx, charIdx)">{{char}}</span>

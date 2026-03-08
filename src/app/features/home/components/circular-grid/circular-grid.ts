@@ -36,7 +36,7 @@ export class CircularGrid implements AfterViewInit, OnDestroy {
   private readonly RING_SPACING_MOBILE = 1.0;
   private readonly MOBILE_BREAKPOINT = 768;
   private readonly RING_OVERSCAN = 1.1;
-  private readonly PARTICLES_PER_RING = 110;
+  private readonly PARTICLES_PER_RING = 160;
   private readonly SPEED_EXP_MIN = 0.65;
   private readonly SPEED_EXP_MAX = 1.75;
   private readonly OPACITY_MIN = 0.;

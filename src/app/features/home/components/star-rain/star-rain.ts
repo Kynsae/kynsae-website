@@ -27,8 +27,8 @@ export class StarRain implements AfterViewInit, OnDestroy {
 
   // Must match #define in star-rain.vert.glsl (PATH_PTS, STARS)
   private readonly STARS = 200;
-  private readonly COLOR_HEAD = 0x5f68f2;
-  private readonly COLOR_TRAIL = 0x6bb3ff;
+  private readonly COLOR_HEAD = 0x4d58ff;
+  private readonly COLOR_TRAIL = 0xadd5ff;
   private readonly PATH_PTS = 15;
   private readonly PATH_SEGS = 14;
   private readonly TRAIL_SAMPLES = 5;

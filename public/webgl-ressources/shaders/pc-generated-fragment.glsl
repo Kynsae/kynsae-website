@@ -7,7 +7,7 @@ varying float vMouseInfluence;
 const vec3 COLOR_LOW_INTENSITY_START = vec3(0.05, 0.35, 1.0);   // Bright blue
 const vec3 COLOR_LOW_INTENSITY_END = vec3(0.04, 0.08, 0.45);     // Dark blue
 const vec3 COLOR_HIGH_INTENSITY_START = vec3(0.8, 0.9, 1.0);    // Light blue/white
-const vec3 COLOR_HIGH_INTENSITY_END = vec3(0.15, 0.25, 0.9);     // Medium blue
+const vec3 COLOR_HIGH_INTENSITY_END = vec3(0.5, 0.6, 1.0);     // Medium blue
 const vec3 COLOR_MOUSE_PURPLE = vec3(0.3, 0.4, 0.9);            // Bright purple
 
 void main() {

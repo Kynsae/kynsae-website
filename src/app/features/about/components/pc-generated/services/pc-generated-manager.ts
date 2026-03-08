@@ -40,7 +40,7 @@ export class PCGeneratedManager {
   private readonly MOUSE_SMOOTH_TIME = 0.2;
   private readonly MORPH_SMOOTH_TIME = 0.08;
   /** Fraction of particles that get the large size (e.g. 0.01 = 1% rare) */
-  private readonly RARE_SIZE_FRACTION = 0.01;
+  private readonly RARE_SIZE_FRACTION = 0.02;
   /** Size multiplier for rare particles (base uSize * this) */
   private readonly RARE_SIZE_MULT = 2.0;
 
