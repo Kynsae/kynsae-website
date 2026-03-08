@@ -27,7 +27,6 @@ export class ScrollManager {
     this.lenis = new Lenis({
       autoRaf: true,
       lerp: .1,
-      duration: 0.4,
     });
 
     this.lenis.on('scroll', () => {

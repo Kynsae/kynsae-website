@@ -14,6 +14,10 @@ export class HomeUIManager {
     this.page2Location = page2Location;
   }
 
+  public getTransitionDelay(index: number, baseDelayInSecond: number = 0.0): string {
+    return this.parallax.getTransitionDelay(index, baseDelayInSecond, 0.03);
+  }
+
   public lerpOffset(
     rangeStart: number, 
     rangeEnd: number, 
@@ -54,37 +58,49 @@ export class HomeUIManager {
   ---------------------------------------------
   */
 
-  // HERO SECTION
+  // HERO
+
+  public heroTitle(index: number) {
+    const endY = index % 2 === 1 ? 300 : 100;
+    if(this.lerp(0, endY, 1, 2) == 0) {
+      return;
+    }
+
+    return {
+      'transform': 'translateY(-' + this.lerp(0, endY, 1, 2) + '%) !important',
+      'opacity': this.lerp(1, 0, 1, 0.8) + ' !important'
+    }
+  }
+
+  get heroSubtitleOpacity() {
+    const opacity = this.lerp(1, 0, 1, .8);
+    return opacity == 1 ? `` : `${opacity} !important`;
+  }
 
   get heroNeonSphereProgress() {
     return this.lerp(0, 1, 1, 5);
-  }
-
-  get heroSubtitle() {
-    return {
-      'transform': `translateY(-${this.lerp(0, 200, 1, 1.3)}%)`,
-      'opacity': this.lerp(1, 0, 1, 0.5)
-    };
-  }
-
-  get heroText() {
-    return `linear-gradient(-130deg, rgba(0,0,0,0) ${ this.lerp(100, -200, 2.6, 4.1) }%, rgba(0,0,0,1) ${ this.lerp(200, -150, 2.6, 4.1) }%)`;
-  }
-
-  heroTextTransform(index: number) {
-    return {
-      'transform': `translateY(${this.lerp(100 + 30 * index, 0, 2.2, 3.3, 'ease-in-out') - this.lerp(0, 300, 2.9, 4.8, 'ease-in')}%)`,
-      'opacity': this.lerp(1, 0, 3.8, 4.1)
-    };
   }
 
   get circularGridProgress() {
     return this.lerp(0, 1, 1, 5);
   }
 
+  get heroTextMask() {
+    return `linear-gradient(-130deg, rgba(0,0,0,0) ${ this.lerp(100, -200, 2.6, 4.1) }%, rgba(0,0,0,1) ${ this.lerp(200, -150, 2.6, 4.1) }%)`;
+  }
+
+  public heroText(index: number) {
+    return {
+      'transform': `translateY(${this.lerp(100 + 30 * index, 0, 2.2, 3.3, 'ease-in-out') - this.lerp(0, 300, 2.9, 4.8, 'ease-in')}%)`,
+      'opacity': this.lerp(1, 0, 4.4, 4)
+    };
+  }
+
   get starRainPercentage() {
     return this.lerp(0, 1, 4.1, 5.3);
   }
+
+  // STARS
   
   get skillsText1Percentage() {
     return this.lerpOffset(0, 100, 1.7, 1.9);

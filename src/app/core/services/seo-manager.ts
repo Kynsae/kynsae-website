@@ -52,6 +52,7 @@ export class SEOManager {
     this.meta.updateTag({ name: 'twitter:title', content: fullTitle });
     this.meta.updateTag({ name: 'twitter:description', content: data.description });
     this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:url', content: url });
 
     // Canonical URL
     let canonicalLink = this.document.querySelector('link[rel="canonical"]');
