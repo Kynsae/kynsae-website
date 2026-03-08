@@ -11,7 +11,7 @@
 
         @for(media of project.medias; track $index) {
             @if(media.type === 'image') {
-                <img [src]="media.url">
+                <img [src]="media.url" [alt]="project.title + ' - Project media'">
             }
 
             @if(media.type === 'video') {
@@ -23,7 +23,7 @@
     <div (click)="navigateBack()" class="back-btn">
         <img class="back-img" src="icons/arrow-left.svg" alt="Go back">
 
-        <img class="back-img-2" src="icons/arrow-left.svg" alt="" aria-hidden="true">
+        <img class="back-img-2" src="icons/arrow-left.svg" alt="Go back" aria-hidden="true">
     </div>
 
     <article class="infos global-padding">
