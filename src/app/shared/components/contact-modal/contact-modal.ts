@@ -42,7 +42,7 @@ export class ContactModal {
   constructor() {
     this.contactForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      message: ['', [Validators.required, Validators.maxLength(1000)]]
+      message: ['', [Validators.required, Validators.maxLength(1000), Validators.minLength(3)]]
     });
 
     this.contactForm.get('email')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
