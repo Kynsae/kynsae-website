@@ -1,7 +1,7 @@
-<div style="position: absolute;" [class.open]="isOpen()" [class.was-open]="wasOpen">
-    <div (click)="closeModal()" (mouseenter)="onBackgroundHover(true)" (mouseleave)="onBackgroundHover(false)" class="background"></div>
+<div style="position: absolute;" [class.open]="isOpen()" [class.was-open]="wasOpen()">
+    <div (click)="closeModal()" (mouseenter)="setShowMouseLabel(true)" (mouseleave)="setShowMouseLabel(false)" class="background"></div>
     
-    <div (click)="closeModal()" (mouseenter)="onCloseButtonHover(true)" (mouseleave)="onCloseButtonHover(false)" class="close-button">
+    <div (click)="closeModal()" (mouseenter)="setShowMouseLabel(true)" (mouseleave)="setShowMouseLabel(false)" class="close-button">
         <img src="icons/close.svg" alt="close the modal">
     </div>
 
@@ -13,29 +13,30 @@
                     <p>></p>
                     <input maxlength="254" tabindex="1" class="text-input" placeholder="ENTER YOUR EMAIL" type="email" formControlName="email">
                 </div>
-                @if(emailError) {
+                @if (emailError()) {
                     <p class="error-label">UNLESS YOU'RE BATMAN, WE NEED A WAY TO REACH YOU.</p>
                 }
                 <div class="text-input-container">
                     <p>></p>
                     <app-custom-textarea [maxlength]=1000 placeholder="AND SAY HI" class="textarea-component" formControlName="message"></app-custom-textarea>
                 </div>
-                @if(messageError) {
+                @if (messageError()) {
                     <p class="error-label">THE MESSAGE FIELD IS HUNGRY. FEED IT WORDS!</p>
                 }
             </div>
             
             <button #submitButton type="submit" tabindex="3" class="sub-modal-container send-button" (click)="submitForm()">
-                <p [class.send-button-label-hide]="isLoading" class="send-button-label">SEND MESSAGE</p>
-                <app-loading-circular [class.loading-circle-show]="isLoading" class="loading-circle"></app-loading-circular>
+                <p [class.send-button-label-hide]="isLoading()" class="send-button-label">SEND MESSAGE</p>
+                <app-loading-circular [class.loading-circle-show]="isLoading()" class="loading-circle"></app-loading-circular>
             </button>
         </div>
     </form>
 
-    @if (wasOpen) {
+    @if (wasOpen()) {
         <app-status-pill
             [type]="'success'"
-            [(isPresenting)]="success"
+            [isPresenting]="success()"
+            (isPresentingChange)="success.set($event)"
             class="status-pill"
         >
             MESSAGE SENT! YOU'LL GET A RESPONSE WITHIN 24 HOURS
@@ -43,14 +44,15 @@
 
         <app-status-pill
             [type]="'error'"
-            [(isPresenting)]="serverError"
+            [isPresenting]="serverError()"
+            (isPresentingChange)="serverError.set($event)"
             class="status-pill"
         >
             A SERVER ERROR OCCURED PLEASE TRY AGAIN LATER
         </app-status-pill>
     }
 
-    <div #mouseLabel [class.show]="showMouseLabel && isOpen()" class="mouse-label">
+    <div #mouseLabel [class.show]="showMouseLabel() && isOpen()" class="mouse-label">
         CLOSE
     </div>
 </div>
