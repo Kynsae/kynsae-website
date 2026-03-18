@@ -33,6 +33,12 @@ export class CarouselEngine {
   private readonly INPUT_ACCELERATION_FACTOR = 5; // how strongly wheel deltas affect momentum
   private readonly MAX_VELOCITY = 5; // cap momentum speed
 
+  /** Image plane subdivisions for lens shader — 300×300 was ~90k verts per image and caused scroll jank on first load. */
+  private readonly IMAGE_PLANE_SEGMENTS = 56;
+
+  /** Drain at most one heavy plane swap per animation frame so multiple loads never hitch the same frame. */
+  private pendingPlaneSwaps: Array<() => void> = [];
+
   private readonly EDGE_SOFT_ZONE = 0.15; // start slowing down this fraction of viewport before edge
   private readonly OVERSCROLL_DAMPING = 0.3; // resistance factor when past edge (lower = more resistance)
   private readonly OVERSCROLL_MAX = 0.1; // max overscroll distance as fraction of frustum width
@@ -88,7 +94,8 @@ export class CarouselEngine {
 
     // Create placeholder plane with red material
     const createPlaceholderPlane = (width: number, height: number, isVideo: boolean): { mesh: THREE.Mesh; geo: THREE.PlaneGeometry; mat: THREE.MeshBasicMaterial } => {
-      const geo = new THREE.PlaneGeometry(width, height, ...(isVideo ? [12, 8] : [300, 300]));
+      const segs = isVideo ? [12, 8] as const : [this.IMAGE_PLANE_SEGMENTS, this.IMAGE_PLANE_SEGMENTS] as const;
+      const geo = new THREE.PlaneGeometry(width, height, ...segs);
       const placeholderTex = createPlaceholderTexture();
       const mat = new THREE.MeshBasicMaterial({ map: placeholderTex, transparent: true });
 
@@ -153,7 +160,8 @@ export class CarouselEngine {
       this.textures[index] = texture;
 
       // Create new geometry with actual dimensions
-      const newGeo = new THREE.PlaneGeometry(actualWidth, baseHeight, ...(isVideo ? [12, 8] : [300, 300]));
+      const segs = isVideo ? [12, 8] as const : [this.IMAGE_PLANE_SEGMENTS, this.IMAGE_PLANE_SEGMENTS] as const;
+      const newGeo = new THREE.PlaneGeometry(actualWidth, baseHeight, ...segs);
       mesh.geometry = newGeo;
       
       // Update mesh userData
@@ -245,6 +253,17 @@ export class CarouselEngine {
     }
     this.clampGroupX();
 
+    // Warm HTTP cache + image decoder so TextureLoader often completes before the slide is on screen
+    for (const m of medias) {
+      if (m.type === 'image') {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.decoding = 'async';
+        img.src = m.url;
+        img.decode?.().catch(() => {});
+      }
+    }
+
     // Track pending recalculation to batch updates
     let recalculatePending = false;
     const scheduleRecalculate = () => {
@@ -258,6 +277,10 @@ export class CarouselEngine {
       });
     };
 
+    const enqueueHeavyPlaneUpdate = (fn: () => void) => {
+      this.pendingPlaneSwaps.push(fn);
+    };
+
     // Second pass: load textures asynchronously and update planes
     planeData.forEach(({ mesh, geo, mat, media }, index) => {
       // Track the current geometry for this plane (may change if updated)
@@ -269,10 +292,20 @@ export class CarouselEngine {
           (tex) => {
             if (this.sceneManager.destroyed) return;
             tex.colorSpace = THREE.SRGBColorSpace;
+            tex.generateMipmaps = true;
+            tex.minFilter = THREE.LinearMipmapLinearFilter;
             const aspect = tex.image.width / tex.image.height;
             const actualWidth = baseHeight * aspect;
-            currentGeo = updatePlaneWithTexture(mesh, mat, currentGeo, tex, actualWidth, false, index);
-            scheduleRecalculate();
+            enqueueHeavyPlaneUpdate(() => {
+              if (this.sceneManager.destroyed) return;
+              currentGeo = updatePlaneWithTexture(mesh, mat, currentGeo, tex, actualWidth, false, index);
+              try {
+                this.renderer.initTexture(tex);
+              } catch {
+                /* noop */
+              }
+              scheduleRecalculate();
+            });
           },
           undefined,
           () => {
@@ -290,29 +323,40 @@ export class CarouselEngine {
         
         video.addEventListener('loadedmetadata', () => {
           if (this.sceneManager.destroyed) return;
-          
-          // Wait 200ms before first play to avoid UI jank
-          setTimeout(() => {
+          // Defer play to next frames so metadata decode doesn't hitch the wheel/scroll frame
+          requestAnimationFrame(() => {
             if (this.sceneManager.destroyed) return;
-            
-            video.play().then(() => {
-              if (this.sceneManager.destroyed) {
-                video.pause();
-                return;
-              }
-              
-              const vtex = new THREE.VideoTexture(video);
-              vtex.colorSpace = THREE.SRGBColorSpace;
-              const vw = video.videoWidth;
-              const vh = video.videoHeight;
-              const aspect = vw / vh;
-              const actualWidth = baseHeight * aspect;
-              currentGeo = updatePlaneWithTexture(mesh, mat, currentGeo, vtex, actualWidth, true, index);
-              scheduleRecalculate();
-            }).catch(() => {
-              console.warn(`Failed to play video: ${media.url}`);
+            requestAnimationFrame(() => {
+              if (this.sceneManager.destroyed) return;
+              video
+                .play()
+                .then(() => {
+                  if (this.sceneManager.destroyed) {
+                    video.pause();
+                    return;
+                  }
+                  const vtex = new THREE.VideoTexture(video);
+                  vtex.colorSpace = THREE.SRGBColorSpace;
+                  const vw = video.videoWidth;
+                  const vh = video.videoHeight;
+                  const aspect = vw / vh;
+                  const actualWidth = baseHeight * aspect;
+                  enqueueHeavyPlaneUpdate(() => {
+                    if (this.sceneManager.destroyed) return;
+                    currentGeo = updatePlaneWithTexture(mesh, mat, currentGeo, vtex, actualWidth, true, index);
+                    try {
+                      this.renderer.initTexture(vtex);
+                    } catch {
+                      /* noop */
+                    }
+                    scheduleRecalculate();
+                  });
+                })
+                .catch(() => {
+                  console.warn(`Failed to play video: ${media.url}`);
+                });
             });
-          }, 600);
+          });
         });
 
         video.addEventListener('error', () => {
@@ -439,6 +483,15 @@ export class CarouselEngine {
   }
 
   private animate = (): void => {
+    // Spread GPU/geometry work across frames so several assets finishing at once doesn't freeze scroll
+    if (this.pendingPlaneSwaps.length > 0 && !this.sceneManager.destroyed) {
+      const work = this.pendingPlaneSwaps.shift()!;
+      try {
+        work();
+      } catch {
+        /* noop */
+      }
+    }
 
     // apply velocity with clamping and compute actual movement this frame
     const applied = this.applyHorizontalDelta(this.velocityX);
@@ -615,6 +668,7 @@ export class CarouselEngine {
 
   public destroy(): void {
     this.sceneManager.destroy();
+    this.pendingPlaneSwaps = [];
 
     // remove scroll listeners
     if (this.containerEl && (this.containerEl as any)._carouselCleanup) {
