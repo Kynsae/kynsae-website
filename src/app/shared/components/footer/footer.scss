@@ -8,6 +8,10 @@
     padding-top: 80px;
 }
 
+a {
+    width: fit-content;
+}
+
 .grid-element {
     // Border on right for first column (odd items)
     &:nth-child(odd) {

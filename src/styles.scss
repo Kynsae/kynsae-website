@@ -88,6 +88,16 @@ body, html {
   overscroll-behavior: none;
 }
 
+/*
+ * Mobile uses native window scroll (ScrollManager adds .native-scroll on html).
+ * body { overflow: hidden } is for Lenis on desktop but blocks page scroll on iOS/Safari.
+ */
+html.native-scroll body {
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 p {
   margin: 0;
 }

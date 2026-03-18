@@ -1,3 +1,46 @@
+<footer class="mobile-container">
+    <div class="mobile-flex">
+        <img class="mobile-vertical-text" src="images/vertical-mobile-footer-text.svg">
+
+        <div class="mobile-content">
+            <p class="mobile-label">SOCIALS</p>
+
+            <div class="mobile-links-container">
+                @for(link of SOCIAL_LINKS; track $index) {
+                    <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                        <app-text-hover-slide [text]="link.label"/>
+                    </a>
+                }
+            </div>
+
+            <p class="mobile-label">CONTACT</p>
+
+            <div class="mobile-links-container">
+                @for(link of CONTACT_LINKS; track $index) {
+                    <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                        <app-text-hover-slide [text]="link.label"/>
+                    </a>
+                }
+            </div>
+
+            <div (click)="openContactModal()" class="mobile-contact-us-button">
+                <p class="mobile-contact-us-button-text">SEND US DIRECTLY A MESSAGE</p>
+
+                <div class="mobile-contact-us-button-title">
+                    <p>CONTACT</p>
+
+                    <img class="arrow-img-1" src="icons/arrow-top-right.svg" alt="External link">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-credits">
+        <p>© 2026 / ALL RIGHTS RESERVED</p>
+        <p>MADE W LUV</p>
+    </div>
+</footer>
+
 <footer class="container">
     <!-- SOCIALS LINKS -->
     <div class="grid-element grid-title global-padding">
