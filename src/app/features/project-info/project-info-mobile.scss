@@ -1,0 +1,70 @@
+@media (max-width: 850px) {
+    .mobile {
+        display: flex !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+}
+
+.mobile {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+
+    &-thumbnail {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 4/5;
+    }
+
+    &-project-info {
+        padding: var(--padding);
+        font-size: 14px;
+
+        &-title {
+            font-family: 'Gothic';
+            font-size: 30px;
+        }
+
+        &-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-block: 10px;
+        }
+
+        &-tag {
+            padding: 7px 10px;
+            border: 1.5px solid var(--border-color-opaque);
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        &-description {
+            text-align: justify;
+        }
+    }
+
+    &-launch {
+        width: 100%;
+        border: 1px solid white;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-top: 40px;
+    }
+
+    &-project-medias {
+        margin-top: 30px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &-project-image, &-project-video {
+        width: 100%;
+    }
+}

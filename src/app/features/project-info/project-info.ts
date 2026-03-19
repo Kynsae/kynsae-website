@@ -11,16 +11,18 @@ import { ScrollRestorationManager } from '../../core/services/scroll-restoration
 import { ProjectInfoUIManager } from './services/project-info-ui-manager';
 import { SEOManager } from '../../core/services/seo-manager';
 import { SEOStructuredDataManager } from '../../core/services/seo-structured-data-manager';
+import { Footer } from '../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-project-info',
   imports: [
     Carousel,
     ProgressLines,
-    CommonModule
+    CommonModule,
+    Footer
   ],
   templateUrl: './project-info.html',
-  styleUrl: './project-info.scss',
+  styleUrls: ['./project-info.scss', './project-info-mobile.scss'],
   providers: [
     ProjectInfoUIManager
   ],

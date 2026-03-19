@@ -1,4 +1,42 @@
-<main>
+<main class="mobile">
+    <img class="mobile-thumbnail" [src]="project.thumbnail" alt="Project thumbnail">
+
+    <div class="mobile-project-info">
+        <p class="mobile-project-info-title">{{ project.title }}</p>
+        
+        <div class="mobile-project-info-tags">
+            @for(tag of project.tags; track $index) {
+                <div class="mobile-project-info-tag">
+                    {{ tag }}
+                </div>
+            }
+        </div>
+        
+        <p class="mobile-project-info-description">{{ project.description }}</p>
+
+        @if(project.websiteUrl) {
+            <div (click)="onLaunchProject()" class="mobile-launch">
+                LAUNCH PROJECT
+            </div>
+        }
+    </div>
+
+    <div class="mobile-project-medias">
+        @for(media of project.medias; track $index) {
+            @if(media.type === 'image') {
+                <img class="mobile-project-image" [src]="media.url" alt="Project media">
+            }
+
+            @if(media.type === 'video') {
+                <video class="mobile-project-video" autoplay muted loop [src]="media.url"></video>
+            }
+        }
+    </div>
+
+    <app-footer [nextPageRoute]="'/work'" [nextPageTitle]="'PROJECTS'"></app-footer>
+</main>
+
+<main class="desktop">
     <app-carousel [project]="project" (progressPercent)="uiManager.onProgressPercent($event)"></app-carousel>
 
     <app-progress-lines [progressPercent]="uiManager.progressPercent()"></app-progress-lines>

@@ -16,7 +16,7 @@ export class StarExposure implements AfterViewInit, OnDestroy {
   public fov = input<number>(0);
   public trailLength = input<number>(0);
 
-  private readonly STAR_COUNT = window.innerWidth * 6.8;
+  private readonly STAR_COUNT = window.innerWidth * 6.9;
   private readonly SEGMENTS_PER_STAR = 8;
   private readonly STAR_COLORS = [0x8566db, 0x8a93c1, 0x524d6a, 0xcfccff, 0x4e6497, 0x475880].map(c => new THREE.Color(c));
   private readonly BOUNDING_SPHERE = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 100);

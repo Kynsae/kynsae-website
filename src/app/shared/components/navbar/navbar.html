@@ -2,6 +2,12 @@
     <div class="mobile-header">
         <img (click)="navigate('/')" class="mobile-logo-img" src="icons/logo.svg" alt="home">
     
+        @if (isOnProjectInfoPage()) {
+            <div (click)="navigateBack()" class="mobile-menu-button">
+                <img src="icons/arrow-left-black.svg" alt="Go back">
+            </div>
+        }
+
         <div (click)="openMobileMenu()" class="mobile-menu-button">
             <img src="icons/menu.svg" alt="Open mobile menu" [class.icon-hidden]="mobileMenuOpen()">
             <img style="width: 16px;" src="icons/close-black.svg" alt="Close mobile menu" [class.icon-hidden]="!mobileMenuOpen()">

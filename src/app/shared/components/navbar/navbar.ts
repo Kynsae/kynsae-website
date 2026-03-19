@@ -1,7 +1,9 @@
 import { Component, inject, ChangeDetectionStrategy, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { TextHoverSlide } from '../text-hover-slide/text-hover-slide';
 import { NavigationLoaderManager } from '../../../core/services/navigation-loader-manager';
+import { ScrollRestorationManager } from '../../../core/services/scroll-restoration-manager';
 
 @Component({
   selector: 'app-navbar',
@@ -69,6 +71,9 @@ export class Navbar {
   private readonly router = inject(Router);
   public readonly navigationLoader = inject(NavigationLoaderManager);
 
+  public readonly scrollRestoration = inject(ScrollRestorationManager);
+  private readonly location = inject(Location);
+
   public navigate(route: string): void {
     this.mobileMenuOpen.set(false);
     this.router.navigateByUrl(route);
@@ -87,11 +92,25 @@ export class Navbar {
     this.mobileMenuOpen.set(!this.mobileMenuOpen());
   }
 
+  public isOnProjectInfoPage(): boolean {
+    const path = this.router.url.split('?')[0];
+    return path.startsWith('/work/');
+  }
+
   public isRouteActive(routeUrl: string): boolean {
     const currentUrl = this.router.url.split('?')[0];
     if (routeUrl === '' || routeUrl === '/') {
       return currentUrl === '' || currentUrl === '/';
     }
     return currentUrl === routeUrl;
+  }
+
+  public navigateBack(): void {
+    if(this.scrollRestoration.savedPosition) {
+      this.location.back();
+    }
+    else {
+      this.router.navigateByUrl('');
+    }
   }
 }

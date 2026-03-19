@@ -26,12 +26,12 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
 }
 
 .mobile-logo-img {
     height: 100%;
+    margin-right: auto;
 }
 
 .mobile-menu-button {
@@ -43,6 +43,7 @@
     justify-content: center;
     border-radius: 100px;
     position: relative;
+    margin-left: 15px;
 
     img {
         position: absolute;
