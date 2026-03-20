@@ -88,8 +88,7 @@ export const PROJECTS_DATA: readonly Project[] = [
     title: 'Lighter_Model',
     description: '3D Model of a lighter, created in Blender. The model is 1:1 in both scale and accuracy. Fully customizable with a custom design.',
     services: ['3D', 'Blender', 'Modeling'],
-    websiteUrl: 'https://aeris-dynamics.netlify.app/',
-    tags: ['3D-MODELING', 'BLENDER'],
+    tags: ['3D MODEL', 'BLENDER'],
     thumbnail: 'projects/lighter-model/cover.webp',
     medias: [
       { type: 'video', url: 'projects/lighter-model/1.mkv'},

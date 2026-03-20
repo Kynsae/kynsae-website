@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './about.html',
-  styleUrl: './about.scss',
+  styleUrls: ['./about.scss', './about-mobile.scss'],
   providers: [AboutUIManager],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
