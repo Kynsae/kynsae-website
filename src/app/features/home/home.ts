@@ -44,7 +44,7 @@ import { CircularGrid } from './components/circular-grid/circular-grid';
     CircularGrid
   ],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
+  styleUrls: ['./home.scss', './home-mobile.scss'],
   providers: [
     HomeUIManager
   ],

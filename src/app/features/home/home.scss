@@ -18,10 +18,6 @@
     .hero-title-letter {
         animation: hero-intro 1s cubic-bezier(1, 0, .39, .86) forwards;
     }
-    
-    .hero-subtitle-letter {
-        animation: hero-intro 1.4s cubic-bezier(1, 0, .39, .86) forwards;
-    }
 }
 
 .hero-section {
@@ -44,24 +40,6 @@
         font-size: clamp(40px, 4vw, 70px);
 
         .hero-title-letter {
-            opacity: 0;
-            will-change: transform, opacity;
-        }
-    }
-
-    .hero-subtitle {
-        position: fixed;
-        left: 50%;
-        bottom: 6.5%;
-        transform: translateX(-50%);
-        
-        display: flex;
-        gap: 1ch;
-        
-        font-size: 25px;
-        will-change: transform;
-
-        .hero-subtitle-letter {
             opacity: 0;
             will-change: transform, opacity;
         }

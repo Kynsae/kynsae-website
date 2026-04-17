@@ -72,11 +72,6 @@ export class HomeUIManager {
     }
   }
 
-  get heroSubtitleOpacity() {
-    const opacity = this.lerp(1, 0, 1, .8);
-    return opacity == 1 ? `` : `${opacity} !important`;
-  }
-
   get heroNeonSphereProgress() {
     return this.lerp(0, 1, 1, 5);
   }
